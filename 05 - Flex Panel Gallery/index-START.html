@@ -42,9 +42,12 @@
       font-size: 20px;
       background-size:cover;
       background-position:center;
+      /* evenly distribute among the space */
       flex: 1;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
     }
 
 
@@ -58,6 +61,25 @@
       margin:0;
       width: 100%;
       transition:transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child{
+      transform: translateY(-100%);
+    }
+
+    .panel.open-active> *:first-child{
+      transform: translateY(0);
+    }
+
+    .panel > *:last-child{
+      transform: translateY(100%);
+    }
+    .panel.open-active> *:last-child{
+      transform: translateY(0);
     }
 
     .panel p {
@@ -71,6 +93,8 @@
     }
 
     .panel.open {
+      flex: 5;
+      /* when open is added, they get 5 times the size */
       font-size:40px;
     }
 
@@ -106,7 +130,21 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel');
+    function toggleOpen(){
+      this.classList.toggle('open');
+    }
+    function toggleActive(e){
+      // multiple properties transitioned
+      //console.log(e.propertyName);
+      if(e.propertyName.includes('flex')){
+        //on safari, it is called 'flex' while other cores uses 'flex-grow'
+        this.classList.toggle('open-active');
+      }
+  }
 
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
   </script>
 
 
