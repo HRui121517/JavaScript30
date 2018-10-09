@@ -60,7 +60,7 @@ ranges.forEach(range => range.addEventListener("change", handleRangeUpdate));
 //TODO: add drag listener
 // ranges.forEach(range => range.addEventListener("change", handleRangeUpdate));
 // TODO: add fullscreen button
-//
+// Add a button that toggles the full screen display of the video
 
 let mousedown = false;
 
