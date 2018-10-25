@@ -12,6 +12,10 @@ body {
   box-sizing: inherit;
 }
 
+.fixed-nav .site-wrap{
+  transform: scale(1);
+}
+
 .site-wrap {
   max-width: 700px;
   margin: 70px auto;
@@ -48,6 +52,10 @@ nav {
   z-index: 1;
 }
 
+.fixed-nav nav{
+  position: fixed;
+}
+
 nav ul {
   margin: 0;
   padding:0;
@@ -70,6 +78,11 @@ li.logo {
   transition: all .5s;
   font-weight: 600;
   font-size: 30px;
+}
+
+.fixed-nav li.logo{
+  max-width: 1000px;
+  /* cannot animate width from 0 to auto */
 }
 
 li.logo a {
