@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Understanding JavaScript's Capture</title>
 </head>
+
 <body class="bod">
 
   <div class="one">
@@ -13,33 +15,52 @@
     </div>
   </div>
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after { box-sizing: inherit; }
+  <style>
+    html {
+      box-sizing: border-box;
+    }
 
-  div {
-    width:100%;
-    padding:100px;
-  }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  .one {
-    background: thistle;
-  }
+    div {
+      width: 100%;
+      padding: 100px;
+    }
 
-  .two {
-    background:mistyrose;
-  }
+    .one {
+      background: thistle;
+    }
 
-  .three {
-    background:coral;
-  }
-</style>
+    .two {
+      background: mistyrose;
+    }
 
-<button></button>
-<script>
+    .three {
+      background: coral;
+    }
+  </style>
 
-</script>
+  <button></button>
+  <script>
+    const divs = document.querySelectorAll("div");
+
+    function logText(e) {
+      console.log(this.classList.value);
+      // e.stopPropagation();
+      // stopPropagation stops from the event from bubbling up
+    }
+    // when click on three, we are essentially clicking on two and one as well
+    // usually we don't see them because we are not listening for those
+    // In modern browsers, browser will do "capture", recogonizing where is being clicked all the way from top to bottom
+    // Then start "bubble" upwards
+    // capture argument will execute it in the top down approach (default is false)
+    // once will removeEventListener once it's ran
+    divs.forEach(div => div.addEventListener('click', logText, { capture: false, once: true }))
+  </script>
 </body>
+
 </html>
